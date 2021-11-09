@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
       image: params[:image],
       category_id: params[:category_id]
     )
-    meal.reload
     params[:ingredients].each do |key, value|
       MealIngredient.create(
         ingredient_id: key.to_i,
@@ -46,6 +45,7 @@ class ApplicationController < Sinatra::Base
 
   patch '/meals/:id' do
     meal = Meal.find(params[:id])
+    binding.pry
 
     MealIngredient.where(meal_id: params[:id]).destroy_all
 
