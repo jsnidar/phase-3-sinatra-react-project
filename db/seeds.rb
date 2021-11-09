@@ -7,10 +7,11 @@ lunch = Category.create(name: 'lunch')
 dinner = Category.create(name: 'dinner')
 snack = Category.create(name: 'snack')
 dessert = Category.create(name: 'dessert')
+
 Meal.create(
   name: 'Egg Sandwich with Fruit',
   description: 'I love eggs and fruit in the morning!',
-  category_id: dessert.id
+  category_id: breakfast.id
 )
 
 lean_ground_beef = Ingredient.create(name: "ground beef 85% lean", macro: 'protein', portion_unit: 'oz', portion_quantity: 1)

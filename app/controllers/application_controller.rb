@@ -22,6 +22,10 @@ class ApplicationController < Sinatra::Base
     MealIngredient.all.to_json
   end
 
+  get '/categories' do
+    Category.all.to_json
+  end
+
   post '/meals' do
     meal = Meal.create(
       name: params[:name],
