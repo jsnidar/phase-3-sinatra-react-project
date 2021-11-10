@@ -45,15 +45,14 @@ class ApplicationController < Sinatra::Base
 
   patch '/meals/:id' do
     meal = Meal.find(params[:id])
-    binding.pry
 
     MealIngredient.where(meal_id: params[:id]).destroy_all
 
-    params[:ingredients].each do |ing|
+    params[:meal_ingredients].each do |meal_ing|
         MealIngredient.create(
-        ingredient_id: ing[:ingredient_id],
+        ingredient_id: meal_ing[:ingredient_id],
         meal_id: meal[:id],
-        quantity: ing[:id]
+        quantity: meal_ing[:id]
         )
     end
 
@@ -69,9 +68,8 @@ class ApplicationController < Sinatra::Base
 
   delete '/meals/:id' do
     meal = Meal.find(params[:id])
-    MealIngredient.where(meal_id: params[:id]).destroy_all
+    meal.meal_ingredients.destroy_all
     meal.destroy
-    meal.reload
     meal.to_json
   end
 
