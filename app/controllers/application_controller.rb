@@ -3,7 +3,7 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/meals" do
-    Meal.all.order(:updated_at).to_json(include: { meal_ingredients: { include: :ingredient }})
+    Meal.all.order(:category_id).to_json(include: { meal_ingredients: { include: :ingredient }})
   end
 
   get "/meals/:id" do

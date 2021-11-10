@@ -4,15 +4,9 @@ puts "🌱 Seeding spices..."
 
 breakfast = Category.create(name: 'breakfast')
 lunch = Category.create(name: 'lunch')
-dinner = Category.create(name: 'dinner')
 snack = Category.create(name: 'snack')
+dinner = Category.create(name: 'dinner')
 dessert = Category.create(name: 'dessert')
-
-Meal.create(
-  name: 'Egg Sandwich with Fruit',
-  description: 'I love eggs and fruit in the morning!',
-  category_id: breakfast.id
-)
 
 lean_ground_beef = Ingredient.create(name: "ground beef 85% lean", macro: 'protein', portion_unit: 'oz', portion_quantity: 1)
 lean_mean = Ingredient.create(name: "lean meat", macro: 'protein', portion_unit: 'oz', portion_quantity: 1)
@@ -187,21 +181,37 @@ MealIngredient.create(meal_id: 1, ingredient_id: 127, quantity: 1)
 MealIngredient.create(meal_id: 1, ingredient_id: 42, quantity: 2)
 MealIngredient.create(meal_id: 1, ingredient_id: 139, quantity: 1)
 
-lunch.meals.create(
+asian_meatballs = lunch.meals.create(
   name: 'Asian Meatballs',
   description: 'Delicious asian meatballs served with broccoli and rice.'
 )
 
-MealIngredient.create(meal_id: 2, ingredient_id: 3, quantity: 6)
-MealIngredient.create(meal_id: 2, ingredient_id: 40, quantity: 3)
-MealIngredient.create(meal_id: 2, ingredient_id: 107, quantity: 1)
+MealIngredient.create(meal_id: asian_meatballs.id, ingredient_id: ground_turkey.id , quantity: 6)
+MealIngredient.create(meal_id: asian_meatballs.id, ingredient_id: egg.id , quantity: 1)
+MealIngredient.create(meal_id: asian_meatballs.id, ingredient_id: rice.id, quantity: 3)
+MealIngredient.create(meal_id: asian_meatballs.id, ingredient_id: green_bean.id, quantity: 2)
+MealIngredient.create(meal_id: asian_meatballs.id, ingredient_id: peanut_oil.id, quantity: 2)
 
-snack.meals.create(
+
+
+apples_and_peanut_butter = snack.meals.create(
   name: 'Apples and Peanut Butter',
   description: 'My favorite snack'
 )
 
-MealIngredient.create(meal_id: 3, ingredient_id: 60, quantity: 1)
-MealIngredient.create(meal_id: 3, ingredient_id: 137, quantity: 3)
+MealIngredient.create(meal_id: apples_and_peanut_butter.id, ingredient_id: apple.id, quantity: 1)
+MealIngredient.create(meal_id: apples_and_peanut_butter.id, ingredient_id: peanut_butter.id, quantity: 3)
+
+beef_and_broccoli = Meal.create(
+  name: 'Beef and Broccoli',
+  description: 'This is my favorite meal!',
+  category_id: dinner.id
+)
+
+MealIngredient.create(meal_id: beef_and_broccoli.id, ingredient_id: broccoli.id, quantity: 1)
+MealIngredient.create(meal_id: beef_and_broccoli.id, ingredient_id: rice.id, quantity: 3)
+MealIngredient.create(meal_id: beef_and_broccoli.id, ingredient_id: lean_ground_beef.id, quantity: 6)
+MealIngredient.create(meal_id: beef_and_broccoli.id, ingredient_id: peanut_oil.id, quantity: 3)
+
 
 puts "✅ Done seeding!"
