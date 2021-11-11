@@ -45,14 +45,13 @@ class ApplicationController < Sinatra::Base
 
   patch '/meals/:id' do
     meal = Meal.find(params[:id])
-
     MealIngredient.where(meal_id: params[:id]).destroy_all
 
-    params[:meal_ingredients].each do |meal_ing|
+    params[:ingredients].each do |meal_ing|
         MealIngredient.create(
         ingredient_id: meal_ing[:ingredient_id],
         meal_id: meal[:id],
-        quantity: meal_ing[:id]
+        quantity: meal_ing[:quantity].to_i
         )
     end
 
