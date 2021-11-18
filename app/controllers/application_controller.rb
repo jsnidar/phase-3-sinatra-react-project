@@ -1,7 +1,6 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-  # Add your routes here
   get "/meals" do
     Meal.all.order(:category_id).to_json(include: { meal_ingredients: { include: :ingredient }})
   end
@@ -27,17 +26,18 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/meals' do
+    binding.pry
     meal = Meal.create(
       name: params[:name],
       description: params[:description],
       image: params[:image],
       category_id: params[:category_id]
     )
-    params[:meal_ingredients].each do |key, value|
-      MealIngredient.create(
-        ingredient_id: key.to_i,
-        meal_id: meal[:id],
-        quantity: value
+    params[:meal_ingredients].each do |meal_ing|
+      meal.meal_ingredients.create(
+      ingredient_id: meal_ing[:ingredient_id],
+      meal_id: meal.id,
+      quantity: meal_ing[:quantity].to_i
       )
     end
     meal.to_json(include: { meal_ingredients: { include: :ingredient }})
@@ -45,11 +45,11 @@ class ApplicationController < Sinatra::Base
 
   patch '/meals/:id' do
     meal = Meal.find(params[:id])
-    MealIngredient.where(meal_id: params[:id]).destroy_all
+    meal.meal_ingredients.destroy_all
     params[:meal_ingredients].each do |meal_ing|
-        MealIngredient.create(
+        meal.meal_ingredients.create(
         ingredient_id: meal_ing[:ingredient_id],
-        meal_id: meal[:id],
+        meal_id: meal.id,
         quantity: meal_ing[:quantity].to_i
         )
     end
@@ -65,6 +65,7 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/meals/:id' do
+    # research dependent destroy to destroy dependent records of a parent
     meal = Meal.find(params[:id])
     meal.meal_ingredients.destroy_all
     meal.destroy

@@ -170,16 +170,16 @@ unsweetened_cashew_milk = Ingredient.create(name: "unsweetened cashew milk", mac
 yogurt_based_dressing = Ingredient.create(name: "yogurt-based dressing", macro: 'fat', portion_unit: 'tbs', portion_quantity: 3)
 oil_based_dressing = Ingredient.create(name: "oil-based dressing", macro: 'fat', portion_unit: 'tsp', portion_quantity: 1)
 
-breakfast.meals.create(
+egg_sandwich = breakfast.meals.create(
   name: 'Egg Sandwich with Fruit',
   description: 'I love eggs and fruit in the morning!'
 )
 
-MealIngredient.create(meal_id: 1, ingredient_id: egg.id, quantity: 2)
-MealIngredient.create(meal_id: 1, ingredient_id: cheddar_cheese.id, quantity: 1)
-MealIngredient.create(meal_id: 1, ingredient_id: butter.id, quantity: 2)
-MealIngredient.create(meal_id: 1, ingredient_id: turkey_bacon.id, quantity: 2)
-MealIngredient.create(meal_id: 1, ingredient_id: strawberries.id, quantity: 1)
+MealIngredient.create(meal_id: egg_sandwich.id, ingredient_id: egg.id, quantity: 2)
+MealIngredient.create(meal_id: egg_sandwich.id, ingredient_id: cheddar_cheese.id, quantity: 1)
+MealIngredient.create(meal_id: egg_sandwich.id, ingredient_id: butter.id, quantity: 2)
+MealIngredient.create(meal_id: egg_sandwich.id, ingredient_id: turkey_bacon.id, quantity: 2)
+MealIngredient.create(meal_id: egg_sandwich.id, ingredient_id: strawberries.id, quantity: 1)
 
 asian_meatballs = lunch.meals.create(
   name: 'Asian Meatballs',
