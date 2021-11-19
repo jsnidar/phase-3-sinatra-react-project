@@ -26,7 +26,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/meals' do
-    binding.pry
     meal = Meal.create(
       name: params[:name],
       description: params[:description],
